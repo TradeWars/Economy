@@ -20,4 +20,3 @@ run:
 	docker run \
 		--name ssc \
 		--env-file .env \
-southclaws/ssc:$(VERSION)
