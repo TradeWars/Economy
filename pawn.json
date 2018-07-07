@@ -1,0 +1,9 @@
+{
+	"user": "TradeWars",
+	"repo": REPOSITORY_NAME,
+	"entry": "test.pwn",
+	"output": "test.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	]
+}
