@@ -1,6 +1,6 @@
 # Economy
 
-[![Build Status](https://travis-ci.org/TradeWars/Economy.svg?branch=master)
+![Build Status](https://travis-ci.org/TradeWars/Economy.svg?branch=master)
 
 ## Usage
 
