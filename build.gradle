@@ -9,6 +9,10 @@ buildscript {
     }
 }
 
+wrapper {
+   gradleVersion = '4.8.1'
+}
+
 //IDEs
 apply plugin: 'idea'
 
