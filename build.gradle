@@ -6,6 +6,7 @@ buildscript {
     ext.kotlin_version = '1.2.51'
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.+'
     }
 }
 
@@ -50,4 +51,11 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+    baseName = 'Economy'
+    classifier = null
 }
