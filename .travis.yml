@@ -1,5 +1,35 @@
+sudo: required
+conditions: v1
 language: java
 jdk:
   - openjdk8
-script:
-  - ./gradlew test shadowJar
+services:
+  - docker
+before_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+jobs:
+  include:
+    # run unit tests
+    - stage: test
+      name: tests
+      script:
+        - ./gradlew test shadowJar
+
+    # deploy only if on one of the main branches
+    # - master is the latest public/live/production version
+    # - staging is the next stable public/live/production version
+    # - develop is the rolling development release version
+    - stage: deploy-branch
+      name: deploy-branch
+      if: branch IN (master, staging, develop)
+      script:
+        - docker build -t temp .
+        - docker tag temp "southclaws/tw-SERVICE_NAME:$TRAVIS_BRANCH"
+        - docker push "southclaws/tw-SERVICE_NAME:$TRAVIS_BRANCH"
+    - stage: deploy-tag
+      name: deploy-tag
+      if: tag IS present
+      script:
+        - docker build -t temp .
+        - docker tag temp "southclaws/tw-SERVICE_NAME:$TRAVIS_TAG"
+        - docker push "southclaws/tw-SERVICE_NAME:$TRAVIS_TAG"
