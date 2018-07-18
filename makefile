@@ -10,13 +10,14 @@ NEW_VERSION := $(shell date -u +%yw%W.%w.%H)
 # Docker
 # -
 
-build: static
+docker-build:
 	docker build -t southclaws/ssc:$(VERSION) .
 
-push:
+docker-push:
 	docker push southclaws/ssc:$(VERSION)
 
-run:
+docker-run:
 	docker run \
 		--name ssc \
 		--env-file .env \
+		southclaws/ssc:$(VERSION)
