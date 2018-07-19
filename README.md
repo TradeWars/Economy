@@ -1,7 +1,6 @@
 # Economy
 
-| | | |
-|-|-|-|
+|-|-|
 | master | [![Build Status for master branch](https://travis-ci.org/TradeWars/Economy.svg?branch=master)](https://travis-ci.org/TradeWars/Economy) |
 | staging | [![Build Status for staging branch](https://travis-ci.org/TradeWars/Economy.svg?branch=staging)](https://travis-ci.org/TradeWars/Economy) |
 | develop | [![Build Status for develop branch](https://travis-ci.org/TradeWars/Economy.svg?branch=develop)](https://travis-ci.org/TradeWars/Economy) |
