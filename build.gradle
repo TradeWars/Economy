@@ -53,6 +53,7 @@ test {
     useJUnitPlatform()
 }
 
+//Builds a selfcontained (fat) jar of the project.
 apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
