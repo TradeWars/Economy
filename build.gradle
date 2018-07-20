@@ -11,7 +11,7 @@ buildscript {
 }
 
 wrapper {
-   gradleVersion = '4.8.1'
+   gradleVersion = '4.9'
 }
 
 //IDEs
@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
     //Kotlin stdlib
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"	
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     //Dependencies for testing
     testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
