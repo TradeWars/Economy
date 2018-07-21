@@ -21,7 +21,7 @@ TODO
 
 ## Contributing
 
-[Please read the contribution guidelines](CONTRIBUTING.md)
+[Please read the contribution guidelines](docs/Contributing.md)
 
 ## Tests
 
