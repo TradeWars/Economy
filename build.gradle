@@ -61,8 +61,14 @@ jacoco {
 
 test {
     useJUnitPlatform()
-    jacoco {
-        destinationFile = file("build/jacoco/test.exec")
+}
+
+jacocoTestReport {
+    reports {
+        xml.setEnabled(true)
+
+        csv.setEnabled(false)
+        html.setEnabled(false)
     }
 }
 
