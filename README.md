@@ -1,6 +1,7 @@
 # Economy
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8042cdcb73c04bd09355154a6af1b33e)](https://www.codacy.com/app/TradeWars/Economy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TradeWars/Economy&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/TradeWars/Economy/branch/develop/graph/badge.svg)](https://codecov.io/gh/TradeWars/Economy)
 
 | master | [![Build Status for master branch](https://travis-ci.org/TradeWars/Economy.svg?branch=master)](https://travis-ci.org/TradeWars/Economy) |
 | - | - |
