@@ -6,12 +6,12 @@ buildscript {
     ext.kotlin_version = '1.2.51'
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.+'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.+'
     }
 }
 
 wrapper {
-   gradleVersion = '4.9'
+    gradleVersion = '4.9'
 }
 
 //IDEs
@@ -52,8 +52,18 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 }
 
+//Test coverage tool
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.1'
+}
+
 test {
     useJUnitPlatform()
+    jacoco {
+        destinationFile = file("build/jacoco/test.exec")
+    }
 }
 
 //Builds a selfcontained (fat) jar of the project.
