@@ -9,11 +9,13 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 jobs:
   include:
-    # run unit tests
+    # run unit tests, build and publish test coverage
     - stage: test
       name: tests
       script:
         - ./gradlew test shadowJar
+        - wget -O report.jar "https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.1/codacy-coverage-reporter-4.0.1-assembly.jar"
+        - java -jar report.jar report -l Java -r "$TRAVIS_BUILD_DIR/build/jacoco/test.exec"
 
     # deploy only if on one of the main branches
     # - master is the latest public/live/production version
