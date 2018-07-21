@@ -1,5 +1,7 @@
 # Economy
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8042cdcb73c04bd09355154a6af1b33e)](https://www.codacy.com/app/TradeWars/Economy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TradeWars/Economy&amp;utm_campaign=Badge_Grade)
+
 | master | [![Build Status for master branch](https://travis-ci.org/TradeWars/Economy.svg?branch=master)](https://travis-ci.org/TradeWars/Economy) |
 | - | - |
 | **staging** | [![Build Status for staging branch](https://travis-ci.org/TradeWars/Economy.svg?branch=staging)](https://travis-ci.org/TradeWars/Economy) |
@@ -15,6 +17,10 @@ directly communicate with the gamemode, whatever interface is provided.
 ## Deployment
 
 TODO
+
+## Contributing
+
+[Please read the contribution guidelines](CONTRIBUTING.md)
 
 ## Tests
 
