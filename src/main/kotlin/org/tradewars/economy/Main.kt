@@ -1,6 +1,5 @@
 package org.tradewars.economy
 
-import org.pmw.tinylog.Logger
 import org.tradewars.economy.basic.UncaughtExceptionHandler
 
 /**
@@ -9,7 +8,7 @@ import org.tradewars.economy.basic.UncaughtExceptionHandler
  * @param[arguments] Passed launch arguments, but those are unused for now
  */
 fun main(arguments: Array<String>) {
-    Logger.info("Starting Economy module.")
+    logger.info("Starting Economy module.")
     initializeUnhandledExceptionHandler()
 }
 
@@ -19,7 +18,7 @@ fun main(arguments: Array<String>) {
  * It is expected that at this point the logging is already set up.
  */
 private fun initializeUnhandledExceptionHandler() {
-    Logger.info("Registering UncaughtExceptionHandler")
+    logger.info("Registering UncaughtExceptionHandler")
     Thread.setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler())
-    Logger.info("Registration of UncaughtExceptionHandler successful.")
+    logger.info("Registration of UncaughtExceptionHandler successful.")
 }
