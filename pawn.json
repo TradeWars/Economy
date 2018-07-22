@@ -1,6 +1,6 @@
 {
 	"user": "TradeWars",
-	"repo": REPOSITORY_NAME,
+	"repo": "Economy",
 	"entry": "test.pwn",
 	"output": "test.amx",
 	"dependencies": [
