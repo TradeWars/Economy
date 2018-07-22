@@ -2,6 +2,8 @@
 # Build Image
 # -
 
+LABEL maintainer="hello@southcla.ws"
+
 FROM openjdk:8u171-jdk as BUILD
 
 WORKDIR /economy
