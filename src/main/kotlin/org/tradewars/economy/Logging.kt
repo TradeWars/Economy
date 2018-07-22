@@ -54,6 +54,9 @@ interface Logger {
  */
 object LoggerJSONToStdOut : Logger {
 
+    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+    private val jsonMapper = jacksonObjectMapper()
+
     override fun info(message: String, throwable: Throwable?) {
         log("info", message, throwable)
     }
@@ -65,10 +68,6 @@ object LoggerJSONToStdOut : Logger {
     override fun error(message: String, throwable: Throwable?) {
         log("error", message, throwable)
     }
-
-    private const val STACK_TRACE_DEPTH_TO_GET_CALLER = 5
-    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-    private val jsonMapper = jacksonObjectMapper()
 
     private fun log(level: String, message: String, throwable: Throwable?) {
         println(jsonMapper.writeValueAsString(
@@ -89,7 +88,13 @@ object LoggerJSONToStdOut : Logger {
      * @param[throwable] the [Throwable] which will be converted to a stacktrace
      */
     private fun generateLogMessage(time: String, level: String, message: String, throwable: Throwable?): LogMessage {
-        val callerStackTraceElement = Thread.currentThread().stackTrace[STACK_TRACE_DEPTH_TO_GET_CALLER]
+        val callerStackTraceElement = Thread.currentThread().stackTrace
+                //Removing the first element, since it will be the call to Thread.currentThread()
+                .drop(1)
+                //Filtering out internal stack trace of the logging.
+                .first {
+                    it.className != javaClass.name && it.className.contains("Logger\$DefaultImpls").not()
+                }
 
         return LogMessage(
                 message = message,
