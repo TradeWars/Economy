@@ -4,14 +4,16 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.io.PrintWriter
 import java.io.StringWriter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * Global instance to log stuff to the standard output stream.
  */
-val logger: Logger = LoggerJSONToStdOut
+val LOGGER: Logger = LoggerJSONToStdOut
 
 /**
- * Simple interface for logging, can easily be wrapped around the logger of any library.
+ * Simple interface for logging, can easily be wrapped around the LOGGER of any library.
  */
 interface Logger {
 
@@ -50,9 +52,7 @@ interface Logger {
  *
  * The data container that is serialized is the class [LogMessage].
  */
-private object LoggerJSONToStdOut : Logger {
-
-    private const val STACK_TRACE_DEPTH_TO_GET_CALLER = 4
+object LoggerJSONToStdOut : Logger {
 
     override fun info(message: String, throwable: Throwable?) {
         log("info", message, throwable)
@@ -66,21 +66,40 @@ private object LoggerJSONToStdOut : Logger {
         log("error", message, throwable)
     }
 
+    private const val STACK_TRACE_DEPTH_TO_GET_CALLER = 5
+    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+    private val jsonMapper = jacksonObjectMapper()
+
     private fun log(level: String, message: String, throwable: Throwable?) {
+        println(jsonMapper.writeValueAsString(
+                generateLogMessage(
+                        LocalDateTime.now().format(dateFormatter),
+                        level,
+                        message,
+                        throwable)
+        ))
+    }
+
+    /**
+     * This method generates a JSON-[String] that is ready to be printed out as LOGGER output.
+     *
+     * Optionally allows passing a [Throwable] which will be converted to its stacktrace.
+     *
+     * @param[message] the message to be printed
+     * @param[throwable] the [Throwable] which will be converted to a stacktrace
+     */
+    private fun generateLogMessage(time: String, level: String, message: String, throwable: Throwable?): LogMessage {
         val callerStackTraceElement = Thread.currentThread().stackTrace[STACK_TRACE_DEPTH_TO_GET_CALLER]
 
-        val logMessage = LogMessage(
+        return LogMessage(
                 message = message,
                 stackTrace = throwable?.toStackTraceString(),
+                time = time,
                 threadName = Thread.currentThread().name,
                 className = callerStackTraceElement.className,
                 methodName = callerStackTraceElement.methodName,
                 lineNumber = callerStackTraceElement.lineNumber,
                 logLevel = level)
-
-        val mapper = jacksonObjectMapper()
-
-        println(mapper.writeValueAsString(logMessage))
     }
 
     private fun Throwable.toStackTraceString(): String {
@@ -92,10 +111,11 @@ private object LoggerJSONToStdOut : Logger {
 }
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-private class LogMessage(val message: String,
-                         val stackTrace: String?,
-                         val threadName: String,
-                         val className: String,
-                         val methodName: String,
-                         val lineNumber: Int,
-                         val logLevel: String)
+class LogMessage(val message: String,
+                 val stackTrace: String?,
+                 val time: String,
+                 val threadName: String,
+                 val className: String,
+                 val methodName: String,
+                 val lineNumber: Int,
+                 val logLevel: String)

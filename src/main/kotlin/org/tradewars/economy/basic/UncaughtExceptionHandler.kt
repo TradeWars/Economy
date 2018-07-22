@@ -1,6 +1,6 @@
 package org.tradewars.economy.basic
 
-import org.tradewars.economy.logger
+import org.tradewars.economy.LOGGER
 
 /**
  * Handles all exceptions that aren't caught by a try-catch block.
@@ -13,7 +13,7 @@ import org.tradewars.economy.logger
 class UncaughtExceptionHandler : Thread.UncaughtExceptionHandler {
 
     override fun uncaughtException(thread: Thread, exception: Throwable?) {
-        logger.error("Uncaught Exception in thread ${thread.name}: ", exception)
+        LOGGER.error("Uncaught Exception in thread ${thread.name}: ", exception)
         //TODO (See TradeWars/Economy/#2) Theoretically we could trigger sending an E-Mail or something like that.
     }
 }

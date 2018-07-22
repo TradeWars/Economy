@@ -8,7 +8,7 @@ import org.tradewars.economy.basic.UncaughtExceptionHandler
  * @param[arguments] Passed launch arguments, but those are unused for now
  */
 fun main(arguments: Array<String>) {
-    logger.info("Starting Economy module.")
+    LOGGER.info("Starting Economy module.")
     initializeUnhandledExceptionHandler()
 }
 
@@ -18,7 +18,7 @@ fun main(arguments: Array<String>) {
  * It is expected that at this point the logging is already set up.
  */
 private fun initializeUnhandledExceptionHandler() {
-    logger.info("Registering UncaughtExceptionHandler")
+    LOGGER.info("Registering UncaughtExceptionHandler")
     Thread.setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler())
-    logger.info("Registration of UncaughtExceptionHandler successful.")
+    LOGGER.info("Registration of UncaughtExceptionHandler successful.")
 }
