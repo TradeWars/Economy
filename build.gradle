@@ -77,6 +77,8 @@ jacocoTestReport {
 apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
+    dependsOn "test"
+
     baseName = 'Economy'
     classifier = null
 }
