@@ -2,9 +2,9 @@
 # Build Image
 # -
 
-LABEL maintainer="hello@southcla.ws"
-
 FROM openjdk:8u171-jdk as BUILD
+
+LABEL maintainer="hello@southcla.ws"
 
 WORKDIR /economy
 COPY . .
@@ -16,6 +16,8 @@ RUN ./gradlew build
 # -
 
 FROM openjdk:8u171-jre
+
+LABEL maintainer="hello@southcla.ws"
 
 COPY --from=BUILD /economy/build/libs/Economy.jar /economy/run.jar
 WORKDIR /economy
